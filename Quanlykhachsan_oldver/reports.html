@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo - Hotel Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reports.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Hotel Manager</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="rooms.html"><i class="fas fa-bed"></i> Quản lý phòng</a></li>
+                <li><a href="bookings.html"><i class="fas fa-calendar-check"></i> Đặt phòng</a></li>
+                <li><a href="guests.html"><i class="fas fa-users"></i> Khách hàng</a></li>
+                <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Dịch vụ</a></li>
+                <li><a href="reports.html" class="active"><i class="fas fa-chart-bar"></i> Báo cáo</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Cài đặt</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <div class="date-range-picker">
+                <button class="date-range-btn">
+                    <i class="fas fa-calendar"></i>
+                    <span>Tháng 8, 2025</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <div class="user-info">
+                <span class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </span>
+                <div class="user">
+                    <img src="images/user-avatar.png" alt="User Avatar">
+                    <span>Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Report Management Section -->
+        <section class="report-management">
+            <!-- Quick Stats -->
+            <div class="quick-stats">
+                <div class="stat-card revenue">
+                    <div class="stat-header">
+                        <h3>Tổng doanh thu</h3>
+                        <select class="period-selector">
+                            <option value="day">Hôm nay</option>
+                            <option value="week">Tuần này</option>
+                            <option value="month" selected>Tháng này</option>
+                            <option value="year">Năm nay</option>
+                        </select>
+                    </div>
+                    <div class="stat-value">
+                        <span class="amount">₫125,000,000</span>
+                        <span class="trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            15.3%
+                        </span>
+                    </div>
+                    <div class="stat-chart">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="stat-card occupancy">
+                    <div class="stat-header">
+                        <h3>Tỷ lệ lấp đầy</h3>
+                        <select class="period-selector">
+                            <option value="day">Hôm nay</option>
+                            <option value="week">Tuần này</option>
+                            <option value="month" selected>Tháng này</option>
+                            <option value="year">Năm nay</option>
+                        </select>
+                    </div>
+                    <div class="stat-value">
+                        <span class="amount">85%</span>
+                        <span class="trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            5.2%
+                        </span>
+                    </div>
+                    <div class="stat-chart">
+                        <canvas id="occupancyChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="stat-card bookings">
+                    <div class="stat-header">
+                        <h3>Số lượng đặt phòng</h3>
+                        <select class="period-selector">
+                            <option value="day">Hôm nay</option>
+                            <option value="week">Tuần này</option>
+                            <option value="month" selected>Tháng này</option>
+                            <option value="year">Năm nay</option>
+                        </select>
+                    </div>
+                    <div class="stat-value">
+                        <span class="amount">142</span>
+                        <span class="trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            8.7%
+                        </span>
+                    </div>
+                    <div class="stat-chart">
+                        <canvas id="bookingsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="stat-card services">
+                    <div class="stat-header">
+                        <h3>Doanh thu dịch vụ</h3>
+                        <select class="period-selector">
+                            <option value="day">Hôm nay</option>
+                            <option value="week">Tuần này</option>
+                            <option value="month" selected>Tháng này</option>
+                            <option value="year">Năm nay</option>
+                        </select>
+                    </div>
+                    <div class="stat-value">
+                        <span class="amount">₫28,500,000</span>
+                        <span class="trend negative">
+                            <i class="fas fa-arrow-down"></i>
+                            3.2%
+                        </span>
+                    </div>
+                    <div class="stat-chart">
+                        <canvas id="servicesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Reports -->
+            <div class="detailed-reports">
+                <!-- Revenue Analysis -->
+                <div class="report-card full-width">
+                    <div class="report-header">
+                        <h3>Phân tích doanh thu</h3>
+                        <div class="report-actions">
+                            <select class="chart-type-selector">
+                                <option value="line">Line Chart</option>
+                                <option value="bar">Bar Chart</option>
+                            </select>
+                            <button class="export-btn">
+                                <i class="fas fa-download"></i>
+                                Xuất báo cáo
+                            </button>
+                        </div>
+                    </div>
+                    <div class="report-content">
+                        <canvas id="revenueAnalysisChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Room Type Performance -->
+                <div class="report-card">
+                    <div class="report-header">
+                        <h3>Hiệu suất theo loại phòng</h3>
+                        <button class="export-btn">
+                            <i class="fas fa-download"></i>
+                            Xuất báo cáo
+                        </button>
+                    </div>
+                    <div class="report-content">
+                        <canvas id="roomTypeChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Service Revenue -->
+                <div class="report-card">
+                    <div class="report-header">
+                        <h3>Doanh thu theo dịch vụ</h3>
+                        <button class="export-btn">
+                            <i class="fas fa-download"></i>
+                            Xuất báo cáo
+                        </button>
+                    </div>
+                    <div class="report-content">
+                        <canvas id="serviceRevenueChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Guest Analytics -->
+                <div class="report-card">
+                    <div class="report-header">
+                        <h3>Phân tích khách hàng</h3>
+                        <div class="report-actions">
+                            <select class="analytics-type">
+                                <option value="demographics">Nhân khẩu học</option>
+                                <option value="booking-patterns">Hành vi đặt phòng</option>
+                                <option value="satisfaction">Mức độ hài lòng</option>
+                            </select>
+                            <button class="export-btn">
+                                <i class="fas fa-download"></i>
+                                Xuất
+                            </button>
+                        </div>
+                    </div>
+                    <div class="report-content guest-analytics">
+                        <div class="analytics-compact-grid">
+                            <div class="analytics-item">
+                                <h4>Độ tuổi</h4>
+                                <canvas id="ageChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+</html>
