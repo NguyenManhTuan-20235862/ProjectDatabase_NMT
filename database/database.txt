@@ -1,0 +1,157 @@
+database(1)
+
+CREATE TABLE Statuses (
+    status_id SERIAL PRIMARY KEY,
+    status_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Bảng RoomTypes (Loại phòng) - Không thay đổi
+CREATE TABLE RoomTypes (
+    room_type_id SERIAL PRIMARY KEY,
+    category VARCHAR(50),
+    area_sqm DECIMAL(10, 2),
+    bed_type VARCHAR(50),
+    capacity INT,
+    price DECIMAL(10, 2)
+);
+
+-- Bảng Rooms (Phòng) - Không thay đổi
+CREATE TABLE Rooms (
+    room_id SERIAL PRIMARY KEY,
+    room_number VARCHAR(10) NOT NULL,
+    room_type_id INT,
+    status_id INT,
+    location VARCHAR(100),
+    FOREIGN KEY (room_type_id) REFERENCES RoomTypes(room_type_id),
+    FOREIGN KEY (status_id) REFERENCES Statuses(status_id)
+);
+
+-- Bảng Customers (Khách hàng) - Không thay đổi
+CREATE TABLE Customers (
+    customer_id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(20),
+    email VARCHAR(100) UNIQUE,
+    date_of_birth DATE,
+    gender VARCHAR(10),
+    nationality VARCHAR(50)
+);
+
+
+CREATE TABLE Employees (
+    employee_id SERIAL PRIMARY KEY,
+    employee_name VARCHAR(255) NOT NULL,
+    position VARCHAR(100),
+    shift VARCHAR(50),
+    phone_number VARCHAR(20),
+    email VARCHAR(100) UNIQUE,
+    status_id INT,
+    FOREIGN KEY (status_id) REFERENCES Statuses(status_id)
+);
+
+
+CREATE TABLE LoyaltyProgram (
+    loyalty_id SERIAL PRIMARY KEY,
+    customer_id INT,
+    points INT DEFAULT 0,
+    member_level VARCHAR(50),
+    status_id INT,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (status_id) REFERENCES Statuses(status_id)
+);
+
+
+CREATE TABLE Services (
+    service_id SERIAL PRIMARY KEY,
+    service_name VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2),
+    service_type VARCHAR(50)
+);
+
+
+CREATE TABLE Bookings (
+    booking_id SERIAL PRIMARY KEY,
+    customer_id INT,
+    room_id INT,
+    check_in DATE,
+    check_out DATE,
+    status_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (room_id) REFERENCES Rooms(room_id),
+    FOREIGN KEY (status_id) REFERENCES Statuses(status_id)
+);
+
+
+CREATE TABLE BookingHistory (
+    history_id SERIAL PRIMARY KEY,
+    booking_id INT,
+    old_status_id INT,
+    new_status_id INT,
+    changed_by INT,
+    change_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (booking_id) REFERENCES Bookings(booking_id),
+    FOREIGN KEY (old_status_id) REFERENCES Statuses(status_id),
+    FOREIGN KEY (new_status_id) REFERENCES Statuses(status_id)
+);
+
+
+CREATE TABLE Invoices (
+    invoice_id SERIAL PRIMARY KEY,
+    booking_id INT,
+    customer_id INT,
+    invoice_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    status_id INT,
+    FOREIGN KEY (booking_id) REFERENCES Bookings(booking_id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (status_id) REFERENCES Statuses(status_id)
+);
+
+-- Bảng InvoiceServices (Chi tiết dịch vụ trong hóa đơn)
+-- Bảng MỚI: Liên kết hóa đơn với các dịch vụ đã sử dụng
+CREATE TABLE InvoiceServices (
+    id SERIAL PRIMARY KEY,
+    invoice_id INT,
+    service_id INT,
+    quantity INT NOT NULL,
+    price_at_sale DECIMAL(10, 2) NOT NULL, -- Giá tại thời điểm bán để tránh thay đổi sau này
+    FOREIGN KEY (invoice_id) REFERENCES Invoices(invoice_id),
+    FOREIGN KEY (service_id) REFERENCES Services(service_id)
+);
+-- Bảng lưu trữ các feedback của khách hàng
+CREATE TABLE CustomerReviews (
+    review_id SERIAL PRIMARY KEY,
+    booking_id INT REFERENCES Bookings(booking_id),
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (booking_id) REFERENCES Bookings(booking_id)
+);
+
+-- Bảng lưu trữ lịch sử giá phòng
+CREATE TABLE RoomPriceHistory (
+    id SERIAL PRIMARY KEY,
+    room_type_id INT REFERENCES RoomTypes(room_type_id),
+    old_price DECIMAL(10,2),
+    new_price DECIMAL(10,2),
+    changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- Thêm trường cho Customers
+ALTER TABLE Customers ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE Customers ADD COLUMN updated_at TIMESTAMP;
+
+-- Thêm trường cho Bookings
+ALTER TABLE Bookings ADD COLUMN total_guests INT;
+ALTER TABLE Bookings ADD COLUMN special_requests TEXT;
+-- Thêm ràng buộc cho giá trị
+ALTER TABLE RoomTypes ADD CONSTRAINT check_positive_price 
+    CHECK (price > 0);
+ALTER TABLE RoomTypes ADD CONSTRAINT check_positive_area 
+    CHECK (area_sqm > 0);
+ALTER TABLE Bookings ADD CONSTRAINT check_dates 
+    CHECK (check_out > check_in);
+-- Tạo index cho các trường thường search
+CREATE INDEX idx_room_number ON Rooms(room_number);
+CREATE INDEX idx_customer_email ON Customers(email);
+CREATE INDEX idx_booking_dates ON Bookings(check_in, check_out);
