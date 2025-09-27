@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Khách Hàng - Hotel Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/guests.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Hotel Manager</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="rooms.html"><i class="fas fa-bed"></i> Quản lý phòng</a></li>
+                <li><a href="bookings.html"><i class="fas fa-calendar-check"></i> Đặt phòng</a></li>
+                <li><a href="guests.html" class="active"><i class="fas fa-users"></i> Khách hàng</a></li>
+                <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Dịch vụ</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-bar"></i> Báo cáo</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Cài đặt</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm khách hàng...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-info">
+                <span class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </span>
+                <div class="user">
+                    <img src="images/user-avatar.png" alt="User Avatar">
+                    <span>Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Guest Management Section -->
+        <section class="guest-management">
+            <div class="guest-header">
+                <h1>Quản lý khách hàng</h1>
+                <button class="add-guest-btn"><i class="fas fa-plus"></i> Thêm khách hàng mới</button>
+            </div>
+
+            <!-- Guest Stats -->
+            <div class="guest-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Tổng khách hàng</h3>
+                        <p>1,234</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Đang lưu trú</h3>
+                        <p>42</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Khách VIP</h3>
+                        <p>156</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Khách quen</h3>
+                        <p>789</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guest List Section -->
+            <div class="guest-list-section">
+                <!-- Filters -->
+                <div class="guest-filters">
+                    <div class="filter-group">
+                        <label>Loại khách:</label>
+                        <select>
+                            <option value="all">Tất cả</option>
+                            <option value="regular">Khách thường</option>
+                            <option value="vip">Khách VIP</option>
+                            <option value="business">Khách doanh nghiệp</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Trạng thái:</label>
+                        <select>
+                            <option value="all">Tất cả</option>
+                            <option value="staying">Đang lưu trú</option>
+                            <option value="checked-out">Đã trả phòng</option>
+                            <option value="booked">Đã đặt phòng</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Sắp xếp theo:</label>
+                        <select>
+                            <option value="recent">Mới nhất</option>
+                            <option value="name">Tên A-Z</option>
+                            <option value="visits">Số lần đặt phòng</option>
+                            <option value="spent">Chi tiêu</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Guest Table -->
+                <div class="guest-table-container">
+                    <table class="guest-table">
+                        <thead>
+                            <tr>
+                                <th>Khách hàng</th>
+                                <th>CCCD/CMND</th>
+                                <th>Liên hệ</th>
+                                <th>Loại khách</th>
+                                <th>Số lần đặt</th>
+                                <th>Tổng chi tiêu</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="guest-info">
+                                        <img src="images/user-avatar.png" alt="Guest">
+                                        <div>
+                                            <span class="guest-name">Nguyễn Văn A</span>
+                                            <span class="guest-id">KH001</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>079201000001</td>
+                                <td>
+                                    <div class="contact-info">
+                                        <div>0901234567</div>
+                                        <div>nguyenvana@email.com</div>
+                                    </div>
+                                </td>
+                                <td><span class="guest-type vip">VIP</span></td>
+                                <td>15</td>
+                                <td>25,000,000đ</td>
+                                <td><span class="status staying">Đang lưu trú</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="view-btn" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                                        <button class="edit-btn" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                        <button class="history-btn" title="Lịch sử"><i class="fas fa-history"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- More guest rows here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="prev-page"><i class="fas fa-chevron-left"></i></button>
+                    <div class="page-numbers">
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <span>...</span>
+                        <button>10</button>
+                    </div>
+                    <button class="next-page"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guest Modal -->
+        <div class="modal" id="guestModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Thêm/Chỉnh sửa khách hàng</h2>
+                <form class="guest-form">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3>Thông tin cơ bản</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Họ tên</label>
+                                <input type="text" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>CCCD/CMND</label>
+                                <input type="text" name="idNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày sinh</label>
+                                <input type="date" name="birthDate">
+                            </div>
+                            <div class="form-group">
+                                <label>Giới tính</label>
+                                <select name="gender">
+                                    <option value="male">Nam</option>
+                                    <option value="female">Nữ</option>
+                                    <option value="other">Khác</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <h3>Thông tin liên hệ</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="tel" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ</label>
+                                <textarea name="address"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="form-section">
+                        <h3>Thông tin bổ sung</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Loại khách</label>
+                                <select name="guestType">
+                                    <option value="regular">Khách thường</option>
+                                    <option value="vip">Khách VIP</option>
+                                    <option value="business">Khách doanh nghiệp</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Ghi chú</label>
+                                <textarea name="notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Lưu</button>
+                        <button type="button" class="cancel-btn">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/guests.js"></script>
+</body>
+</html>

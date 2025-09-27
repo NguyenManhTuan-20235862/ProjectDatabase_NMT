@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Phòng - Hotel Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bookings.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Hotel Manager</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="rooms.html"><i class="fas fa-bed"></i> Quản lý phòng</a></li>
+                <li><a href="bookings.html" class="active"><i class="fas fa-calendar-check"></i> Đặt phòng</a></li>
+                <li><a href="guests.html"><i class="fas fa-users"></i> Khách hàng</a></li>
+                <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Dịch vụ</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-bar"></i> Báo cáo</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Cài đặt</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm đặt phòng...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-info">
+                <span class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </span>
+                <div class="user">
+                    <img src="images/user-avatar.png" alt="User Avatar">
+                    <span>Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Booking Management Section -->
+        <section class="booking-management">
+            <div class="booking-header">
+                <h1>Quản lý đặt phòng</h1>
+                <button class="new-booking-btn"><i class="fas fa-plus"></i> Đặt phòng mới</button>
+            </div>
+
+            <!-- Booking Calendar -->
+            <div class="booking-calendar">
+                <div class="calendar-header">
+                    <button class="prev-month"><i class="fas fa-chevron-left"></i></button>
+                    <h2>Tháng 8, 2025</h2>
+                    <button class="next-month"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-grid">
+                    <!-- Calendar will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Booking List -->
+            <div class="booking-list">
+                <div class="list-header">
+                    <h2>Danh sách đặt phòng</h2>
+                    <div class="list-filters">
+                        <select class="status-filter">
+                            <option value="all">Tất cả trạng thái</option>
+                            <option value="confirmed">Đã xác nhận</option>
+                            <option value="pending">Chờ xác nhận</option>
+                            <option value="checked-in">Đã nhận phòng</option>
+                            <option value="checked-out">Đã trả phòng</option>
+                            <option value="cancelled">Đã hủy</option>
+                        </select>
+                        <input type="date" class="date-filter">
+                    </div>
+                </div>
+                <div class="booking-table-container">
+                    <table class="booking-table">
+                        <thead>
+                            <tr>
+                                <th>Mã đặt phòng</th>
+                                <th>Khách hàng</th>
+                                <th>Phòng</th>
+                                <th>Ngày nhận</th>
+                                <th>Ngày trả</th>
+                                <th>Trạng thái</th>
+                                <th>Tổng tiền</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#BK001</td>
+                                <td>
+                                    <div class="guest-info">
+                                        <img src="images/user-avatar.png" alt="Guest">
+                                        <div>
+                                            <span class="guest-name">Nguyễn Văn A</span>
+                                            <span class="guest-phone">0901234567</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>101</td>
+                                <td>24/08/2025</td>
+                                <td>26/08/2025</td>
+                                <td><span class="status confirmed">Đã xác nhận</span></td>
+                                <td>1,500,000đ</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="edit-btn" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                        <button class="checkin-btn" title="Nhận phòng"><i class="fas fa-sign-in-alt"></i></button>
+                                        <button class="cancel-btn" title="Hủy đặt phòng"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- More booking rows here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Booking Modal -->
+        <div class="modal" id="bookingModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Đặt phòng mới</h2>
+                <form class="booking-form">
+                    <!-- Guest Information -->
+                    <div class="form-section">
+                        <h3>Thông tin khách hàng</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Họ tên</label>
+                                <input type="text" name="guestName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="tel" name="guestPhone" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="guestEmail">
+                            </div>
+                            <div class="form-group">
+                                <label>CMND/CCCD</label>
+                                <input type="text" name="guestId" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking Details -->
+                    <div class="form-section">
+                        <h3>Chi tiết đặt phòng</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Loại phòng</label>
+                                <select name="roomType" required>
+                                    <option value="">Chọn loại phòng</option>
+                                    <option value="single">Phòng đơn</option>
+                                    <option value="double">Phòng đôi</option>
+                                    <option value="suite">Phòng Suite</option>
+                                    <option value="luxury">Phòng Luxury</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Số phòng</label>
+                                <select name="roomNumber" required>
+                                    <option value="">Chọn số phòng</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày nhận phòng</label>
+                                <input type="date" name="checkInDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày trả phòng</label>
+                                <input type="date" name="checkOutDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Số người</label>
+                                <input type="number" name="guestCount" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Ghi chú</label>
+                                <textarea name="notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Services -->
+                    <div class="form-section">
+                        <h3>Dịch vụ bổ sung</h3>
+                        <div class="services-grid">
+                            <label class="service-item">
+                                <input type="checkbox" name="service_breakfast">
+                                <i class="fas fa-coffee"></i>
+                                <span>Bữa sáng</span>
+                                <span class="price">100,000đ/người</span>
+                            </label>
+                            <label class="service-item">
+                                <input type="checkbox" name="service_airport">
+                                <i class="fas fa-shuttle-van"></i>
+                                <span>Đưa đón sân bay</span>
+                                <span class="price">300,000đ</span>
+                            </label>
+                            <label class="service-item">
+                                <input type="checkbox" name="service_spa">
+                                <i class="fas fa-spa"></i>
+                                <span>Spa</span>
+                                <span class="price">500,000đ</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Payment Information -->
+                    <div class="form-section">
+                        <h3>Thông tin thanh toán</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Phương thức thanh toán</label>
+                                <select name="paymentMethod" required>
+                                    <option value="cash">Tiền mặt</option>
+                                    <option value="card">Thẻ tín dụng</option>
+                                    <option value="transfer">Chuyển khoản</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Đặt cọc</label>
+                                <input type="number" name="deposit" min="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Xác nhận đặt phòng</button>
+                        <button type="button" class="cancel-btn">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/bookings.js"></script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Khách Sạn</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Hotel Manager</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="rooms.html"><i class="fas fa-bed"></i> Quản lý phòng</a></li>
+                <li><a href="bookings.html"><i class="fas fa-calendar-check"></i> Đặt phòng</a></li>
+                <li><a href="guests.html"><i class="fas fa-users"></i> Khách hàng</a></li>
+                <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Dịch vụ</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-bar"></i> Báo cáo</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Cài đặt</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-info">
+                <span class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </span>
+                <div class="user">
+                    <img src="images/user-avatar.png" alt="User Avatar">
+                    <span>Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <section class="dashboard">
+            <h1>Tổng quan</h1>
+            <!-- Quick Stats Cards -->
+            <div class="stats-cards">
+                <div class="card">
+                    <div class="card-icon rooms">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Phòng trống</h3>
+                        <p>15/30</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon bookings">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Đặt phòng hôm nay</h3>
+                        <p>8</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon guests">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Khách đang lưu trú</h3>
+                        <p>25</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon revenue">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Doanh thu hôm nay</h3>
+                        <p>15,000,000đ</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon housekeeping">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Cần dọn phòng</h3>
+                        <p>5</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon maintenance">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Yêu cầu bảo trì</h3>
+                        <p>3</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-container">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2>Doanh thu theo ngày</h2>
+                        <select class="period-selector">
+                            <option value="week">Tuần này</option>
+                            <option value="month">Tháng này</option>
+                        </select>
+                    </div>
+                    <div class="chart-content">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2>Tỷ lệ đặt phòng</h2>
+                        <select class="period-selector">
+                            <option value="week">Tuần này</option>
+                            <option value="month">Tháng này</option>
+                        </select>
+                    </div>
+                    <div class="chart-content">
+                        <canvas id="occupancyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks Section -->
+            <div class="tasks-section">
+                <div class="task-card">
+                    <h2>Công việc cần làm</h2>
+                    <ul class="task-list">
+                        <li class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <div class="task-content">
+                                <div class="task-title">Kiểm tra phòng 205 - Khách checkout</div>
+                                <div class="task-meta">Đến hạn: 14:00</div>
+                            </div>
+                        </li>
+                        <li class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <div class="task-content">
+                                <div class="task-title">Chuẩn bị phòng VIP 501</div>
+                                <div class="task-meta">Đến hạn: 15:00</div>
+                            </div>
+                        </li>
+                        <li class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <div class="task-content">
+                                <div class="task-title">Bảo trì điều hòa phòng 304</div>
+                                <div class="task-meta">Đến hạn: 16:30</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="task-card">
+                    <h2>Hoạt động gần đây</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background-color: #3498db;">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Check-in: Phòng 301</div>
+                                <div class="activity-time">10 phút trước</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background-color: #2ecc71;">
+                                <i class="fas fa-broom"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Dọn phòng: 205 hoàn thành</div>
+                                <div class="activity-time">30 phút trước</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background-color: #e74c3c;">
+                                <i class="fas fa-door-open"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Check-out: Phòng 402</div>
+                                <div class="activity-time">1 giờ trước</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Bookings -->
+            <div class="recent-bookings">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2>Đặt phòng gần đây</h2>
+                        <button class="view-all-btn">Xem tất cả</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã đặt phòng</th>
+                                <th>Khách hàng</th>
+                                <th>Phòng</th>
+                                <th>Ngày nhận</th>
+                                <th>Ngày trả</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#BK001</td>
+                                <td>Nguyễn Văn A</td>
+                                <td>101</td>
+                                <td>24/08/2025</td>
+                                <td>26/08/2025</td>
+                                <td><span class="status confirmed">Đã xác nhận</span></td>
+                            </tr>
+                            <tr>
+                                <td>#BK002</td>
+                                <td>Trần Thị B</td>
+                                <td>205</td>
+                                <td>24/08/2025</td>
+                                <td>25/08/2025</td>
+                                <td><span class="status pending">Chờ xác nhận</span></td>
+                            </tr>
+                            <tr>
+                                <td>#BK003</td>
+                                <td>Lê Văn C</td>
+                                <td>304</td>
+                                <td>25/08/2025</td>
+                                <td>27/08/2025</td>
+                                <td><span class="status completed">Đã nhận phòng</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
