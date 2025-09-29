@@ -49,6 +49,115 @@
 .housekeeping { background-color: #e74c3c; }
 .maintenance { background-color: #1abc9c; }
 
+/* Admin Profile Styles */
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.admin-profile:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.admin-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.admin-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-info h4 {
+    font-size: 14px;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.admin-info p {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+}
+
+.admin-profile .fa-chevron-down {
+    font-size: 12px;
+    color: #666;
+    margin-left: 8px;
+    transition: transform 0.3s;
+}
+
+.admin-profile.active .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/* Profile Dropdown Styles */
+.profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    min-width: 200px;
+    display: none;
+    z-index: 1000;
+}
+
+.profile-dropdown.show {
+    display: block;
+}
+
+.profile-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.profile-dropdown a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.profile-dropdown i {
+    font-size: 16px;
+    color: #666;
+}
+
+.profile-dropdown hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 8px 0;
+}
+
+.profile-dropdown .logout-btn {
+    color: #dc3545;
+}
+
+.profile-dropdown .logout-btn i {
+    color: #dc3545;
+}
+
 .card-info h3 {
     font-size: 14px;
     color: #666;

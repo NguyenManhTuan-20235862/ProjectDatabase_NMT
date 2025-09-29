@@ -86,168 +86,129 @@ body {
     margin-top: 10px;
 }
 
-.welcome-text {
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.alert-error {
+    background-color: #fdecea;
+    color: #ea4335;
+    border: 1px solid #ea4335;
+}
+
+.alert.show {
+    display: block;
+}
+
+.login-form h2 {
     text-align: center;
-    margin-bottom: 40px;
-}
-
-.welcome-text h2 {
-    font-size: 28px;
+    font-size: 24px;
+    margin-bottom: 30px;
     color: var(--text-color);
-    margin-bottom: 10px;
 }
 
-.welcome-text p {
-    color: #5f6368;
-}
-
-.input-group {
-    margin-bottom: 25px;
-}
-
-.input-field {
-    position: relative;
+.form-group {
     margin-bottom: 20px;
 }
 
-.input-field input {
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.form-group input {
     width: 100%;
-    padding: 15px 15px 15px 50px;
+    padding: 12px 15px;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     font-size: 16px;
     transition: all 0.3s ease;
 }
 
-.input-field input:focus {
+.form-group input:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1);
+    outline: none;
 }
 
-.input-field i {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #5f6368;
-    font-size: 20px;
-}
-
-.input-field label {
-    position: absolute;
-    left: 50px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #5f6368;
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-.input-field input:focus ~ label,
-.input-field input:valid ~ label {
-    top: 0;
-    font-size: 12px;
-    color: var(--primary-color);
-    background: white;
-    padding: 0 5px;
-}
-
-/* .toggle-password {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #5f6368;
-} */
-
-.remember-forgot {
+.form-options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    font-size: 14px;
 }
 
-.remember {
+.form-options label {
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
-.remember input {
-    display: none;
-}
-
-.checkmark {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #5f6368;
-    border-radius: 4px;
+.form-options input[type="checkbox"] {
     margin-right: 8px;
-    position: relative;
 }
 
-.remember input:checked ~ .checkmark {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.checkmark:after {
-    content: '';
-    position: absolute;
-    display: none;
-    left: 6px;
-    top: 2px;
-    width: 3px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-
-.remember input:checked ~ .checkmark:after {
-    display: block;
-}
-
-.forgot-link {
+.form-options .forgot-password {
     color: var(--primary-color);
     text-decoration: none;
-    font-size: 14px;
 }
 
-.forgot-link:hover {
+.form-options .forgot-password:hover {
     text-decoration: underline;
 }
 
 .login-btn {
     width: 100%;
     padding: 15px;
-    background: var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
     border: none;
     border-radius: 8px;
-    color: white;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    position: relative;
+    overflow: hidden;
 }
 
 .login-btn:hover {
-    background: var(--secondary-color);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+    background-color: var(--secondary-color);
 }
 
-.login-btn i {
-    transition: transform 0.3s ease;
+.login-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
-.login-btn:hover i {
-    transform: translateX(5px);
+.loading {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@keyframes spin {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+.login-btn.loading .loading {
+    display: inline-block;
 }
 
 .footer {
@@ -255,50 +216,6 @@ body {
     margin-top: 40px;
     color: #5f6368;
     font-size: 12px;
-}
-
-.hotel-info {
-    flex: 1;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    padding: 60px 40px;
-    color: white;
-    display: flex;
-    align-items: center;
-}
-
-.info-content {
-    max-width: 400px;
-}
-
-.info-content h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-
-.info-content p {
-    margin-bottom: 40px;
-    line-height: 1.6;
-    opacity: 0.9;
-}
-
-.features {
-    display: grid;
-    gap: 20px;
-}
-
-.feature {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.feature i {
-    font-size: 24px;
-    opacity: 0.9;
-}
-
-.feature span {
-    font-size: 16px;
     opacity: 0.9;
 }
 
