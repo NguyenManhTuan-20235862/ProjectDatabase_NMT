@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Nhân Viên - Hotel Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/staff.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Hotel Manager</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="rooms.html"><i class="fas fa-bed"></i> Quản lý phòng</a></li>
+                <li><a href="bookings.html"><i class="fas fa-calendar-check"></i> Đặt phòng</a></li>
+                <li><a href="guests.html"><i class="fas fa-users"></i> Khách hàng</a></li>
+                <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Dịch vụ</a></li>
+                <li><a href="staff.html" class="active"><i class="fas fa-user-tie"></i> Nhân viên</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-bar"></i> Báo cáo</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Cài đặt</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm nhân viên...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-info">
+                <span class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </span>
+                <div class="user">
+                    <img src="images/user-avatar.png" alt="User Avatar">
+                    <span>Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Staff Management Section -->
+        <section class="staff-management">
+            <div class="staff-header">
+                <h1>Quản lý nhân viên</h1>
+                <button class="add-staff-btn"><i class="fas fa-plus"></i> Thêm nhân viên mới</button>
+            </div>
+
+            <!-- Staff Stats -->
+            <div class="staff-stats">
+                <div class="stat-card">
+                    <div class="stat-icon total-staff">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Tổng nhân viên</h3>
+                        <p>25</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon active-staff">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Đang làm việc</h3>
+                        <p>20</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon admin-staff">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Quản trị viên</h3>
+                        <p>5</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon new-staff">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Mới (tháng này)</h3>
+                        <p>3</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Staff Filters -->
+            <div class="staff-filters">
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label>Vai trò</label>
+                        <select>
+                            <option value="">Tất cả vai trò</option>
+                            <option value="admin">Quản trị viên</option>
+                            <option value="staff">Nhân viên</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Trạng thái</label>
+                        <select>
+                            <option value="">Tất cả trạng thái</option>
+                            <option value="active">Đang làm việc</option>
+                            <option value="inactive">Ngừng làm việc</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Sắp xếp theo</label>
+                        <select>
+                            <option value="name">Tên</option>
+                            <option value="role">Vai trò</option>
+                            <option value="status">Trạng thái</option>
+                            <option value="date">Ngày tham gia</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Staff Table -->
+            <div class="staff-table-container">
+                <table class="staff-table">
+                    <thead>
+                        <tr>
+                            <th>Nhân viên</th>
+                            <th>Vai trò</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Ngày tham gia</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="staff-info">
+                                    <img src="images/user-avatar.png" alt="Staff">
+                                    <div>
+                                        <span class="staff-name">Nguyễn Văn Admin</span>
+                                        <span class="staff-id">NV001</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="staff-role role-admin">Quản trị viên</span></td>
+                            <td>admin@hotel.com</td>
+                            <td>0123456789</td>
+                            <td>01/01/2025</td>
+                            <td><span class="status-badge status-active">Đang làm việc</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="edit-btn" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                    <button class="delete-btn" title="Xóa"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- More staff rows here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Staff Modal -->
+        <div class="modal" id="staffModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Thêm/Chỉnh sửa nhân viên</h2>
+                <form class="staff-form">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3>Thông tin cơ bản</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Họ tên</label>
+                                <input type="text" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="tel" name="phone" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Role and Status -->
+                    <div class="form-section">
+                        <h3>Vai trò và trạng thái</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Vai trò</label>
+                                <select name="role" required>
+                                    <option value="staff">Nhân viên</option>
+                                    <option value="admin">Quản trị viên</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Trạng thái</label>
+                                <select name="status" required>
+                                    <option value="active">Đang làm việc</option>
+                                    <option value="inactive">Ngừng làm việc</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Password Section -->
+                    <div class="form-section">
+                        <h3>Mật khẩu</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Mật khẩu</label>
+                                <input type="password" name="password">
+                            </div>
+                            <div class="form-group">
+                                <label>Xác nhận mật khẩu</label>
+                                <input type="password" name="confirmPassword">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn">Hủy</button>
+                        <button type="submit" class="save-btn">Lưu nhân viên</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/staff.js"></script>
+</body>
+</html>

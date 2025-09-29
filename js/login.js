@@ -1,4 +1,70 @@
+const API_BASE_URL = 'http://localhost:5000/api';
+
 document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    const errorAlert = document.getElementById('errorAlert');
+    const loadingSpinner = document.querySelector('.loading');
+
+    // Function to show error message
+    function showError(message) {
+        errorAlert.textContent = message;
+        errorAlert.style.display = 'block';
+        setTimeout(() => {
+            errorAlert.style.display = 'none';
+        }, 5000);
+    }
+
+    // Function to handle login
+    async function handleLogin(e) {
+        e.preventDefault();
+
+        // Show loading spinner
+        loadingSpinner.style.display = 'inline-block';
+        
+        // Get form data
+        const formData = new FormData(loginForm);
+        const loginData = {
+            username: formData.get('username'),
+            password: formData.get('password')
+        };
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginData)
+            });
+
+            const data = await response.json();
+
+            if (!data.success) {
+                throw new Error(data.message || 'Đăng nhập thất bại');
+            }
+
+            // Store user info in localStorage
+            localStorage.setItem('user', JSON.stringify(data.user));
+
+            // Redirect to dashboard
+            window.location.href = 'index.html';
+
+        } catch (error) {
+            showError(error.message);
+        } finally {
+            // Hide loading spinner
+            loadingSpinner.style.display = 'none';
+        }
+    }
+
+    // Event listeners
+    loginForm.addEventListener('submit', handleLogin);
+
+    // Check if user is already logged in
+    const user = localStorage.getItem('user');
+    if (user) {
+        window.location.href = 'index.html';
+    }
     // Xử lý hiệu ứng input fields
     const inputs = document.querySelectorAll('.input-field input');
     inputs.forEach(input => {
